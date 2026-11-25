@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASPPAA Solution | Empowering Ideas Through Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#080f1e;--navy2:#101c36;--blue:#176bce;--blue2:#287bff;--cyan:#00d5f2;--muted:#a9b8d0;--ink:#404758;--light:#f4f7fc;--line:rgba(255,255,255,.12)}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:Inter,system-ui,sans-serif;background:var(--navy);color:#fff;line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;width:100%}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:11px;letter-spacing:1.1px;text-transform:uppercase}
+.h1,.h2,.h3{font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff}
+.h2{font-size:36px;line-height:44px;letter-spacing:-.75px}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.8px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+.grad{background:linear-gradient(90deg,var(--blue2),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:18px;line-height:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 24px;font:600 15px Inter,sans-serif;color:#fff;border:0;cursor:pointer;transition:transform .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--blue);box-shadow:0 0 14px rgba(40,123,255,.4)}
+.btn-ghost{background:rgba(16,28,54,.9);border:1px solid rgba(255,255,255,.15)}
+svg.i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.blob{position:absolute;border-radius:9999px;filter:blur(120px);pointer-events:none}
+
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(8,15,30,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:96px}
+.brand{display:flex;align-items:center;gap:14px;background:#fff;color:var(--navy);border-radius:999px;padding:8px 24px 8px 8px;height:64px}
+.brand b{font-family:'Space Grotesk',sans-serif;font-size:24px;letter-spacing:1.2px;display:block;line-height:24px}
+.brand small{font:700 13px 'JetBrains Mono',monospace;letter-spacing:3px;color:var(--blue);display:block}
+.emblem{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue2),var(--cyan));display:grid;place-items:center;color:#fff;font:700 18px 'Space Grotesk',sans-serif}
+.menu{display:flex;gap:32px}
+.menu a{font:600 15px Inter,sans-serif;color:var(--muted)}
+.menu a:first-child{color:#fff}
+.menu a:hover{color:#fff}
+.cta-sm{background:var(--blue);padding:12px 24px;border-radius:999px;font:600 15px Inter;box-shadow:0 0 12px rgba(40,123,255,.35)}
+.burger{display:none;background:none;border:0;color:#fff;cursor:pointer}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:160px 0 112px;background-color:var(--navy);background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px}
+.hero-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:40px;align-items:center}
+.hero-copy{grid-column:1/span 6;display:flex;flex-direction:column;gap:24px}
+.badge{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:rgba(16,28,54,.8);border:1px solid #e5e7eb;border-radius:999px;padding:7px 17px;backdrop-filter:blur(12px)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.badge span{color:var(--cyan)}
+.hero h1{font-size:60px;line-height:66px;letter-spacing:-1.5px}
+.hero .lead{max-width:738px}
+.ctas{display:flex;gap:16px;flex-wrap:wrap;padding-top:8px}
+.trust{border-top:1px solid var(--line);padding-top:13px;display:flex;gap:12px;align-items:center;color:var(--muted);font-size:14px}
+.hero-visual{grid-column:7/span 6;position:relative;height:540px;display:flex;align-items:center;justify-content:center}
+.orbit{width:100%;max-width:540px;aspect-ratio:1;filter:drop-shadow(0 0 40px rgba(40,123,255,.25))}
+.float{position:absolute;background:rgba(16,28,54,.85);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:20px;padding:13px 17px;display:flex;gap:12px;align-items:center;box-shadow:0 12px 32px rgba(8,15,30,.6)}
+.float .ic{width:36px;height:36px;border-radius:16px;display:grid;place-items:center;background:rgba(23,107,206,.25);border:1px solid rgba(40,123,255,.4);color:var(--blue2)}
+.float b{display:block;font:600 16px Inter;white-space:nowrap}
+.float small{font:500 11px 'JetBrains Mono',monospace;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.f1{left:16px;top:24px}.f2{right:8px;top:56px;border-color:rgba(0,213,242,.3)}.f3{left:32px;bottom:48px}
+.code{position:absolute;right:8px;bottom:24px;background:rgba(8,15,30,.9);border:1px solid #e5e7eb;border-radius:20px;padding:13px 17px;font:500 11px 'JetBrains Mono',monospace;color:var(--cyan);letter-spacing:1.1px;line-height:18px;box-shadow:0 12px 32px rgba(8,15,30,.65)}
+.code .c1{color:var(--muted)}
+
+/* impact */
+.impact{background:var(--light);color:var(--ink);padding:97px 0;border-top:1px solid rgba(192,198,219,.6);border-bottom:1px solid rgba(192,198,219,.6)}
+.impact .h2{color:var(--navy)}
+.impact .eyebrow{color:var(--blue)}
+.impact-head{max-width:768px;margin-bottom:56px}
+.impact-head p{font-size:18px;line-height:28px;margin-top:16px;color:var(--ink)}
+.counters{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.counter{background:#fff;border:1px solid #c0c6db;border-radius:24px;padding:29px;display:flex;flex-direction:column;gap:24px;box-shadow:0 1px 1px rgba(0,0,0,.05)}
+.counter-top{display:flex;justify-content:space-between;align-items:center}
+.counter-ic{width:44px;height:44px;border-radius:20px;background:#d6e3ff;display:grid;place-items:center;color:var(--blue)}
+.counter-dot{width:8px;height:8px;border-radius:50%;background:var(--blue2);box-shadow:0 0 10px var(--blue2)}
+.counter strong{display:block;font:700 44px 'Space Grotesk',sans-serif;letter-spacing:-1px;color:var(--navy);line-height:50px}
+.counter span{font:600 16px Inter;color:var(--ink)}
+
+/* lead gen */
+.lead-sec{background:var(--navy);padding:112px 0;position:relative;overflow:hidden}
+.lead-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:48px;align-items:start}
+.lead-copy{grid-column:1/span 5;display:flex;flex-direction:column;gap:24px}
+.lead-copy .eyebrow{margin:0}
+.points{display:flex;flex-direction:column;gap:16px;padding-top:8px}
+.point{display:flex;gap:14px;align-items:center;font-size:16px}
+.point i{width:32px;height:32px;border-radius:16px;background:#002f64;display:grid;place-items:center;color:var(--cyan);flex-shrink:0}
+.netcard{background:rgba(16,28,54,.6);border:1px solid #e5e7eb;border-radius:24px;padding:21px;backdrop-filter:blur(12px);margin-top:16px}
+.netcard svg{width:100%;height:138px;display:block}
+.netcard .foot{border-top:1px solid var(--line);margin-top:9px;padding-top:9px;display:flex;justify-content:space-between}
+.netcard .foot span{font:500 11px 'JetBrains Mono',monospace;letter-spacing:1.1px;color:var(--muted)}
+.netcard .foot span:nth-child(2){color:var(--cyan)}
+.form-card{grid-column:6/span 7;background:rgba(16,28,54,.8);border:1px solid #e5e7eb;border-radius:24px;padding:41px;backdrop-filter:blur(24px);box-shadow:0 24px 60px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:24px}
+.form-card h3{font-size:24px;line-height:32px;letter-spacing:-.25px}
+form{display:flex;flex-direction:column;gap:20px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font:500 13px Inter;letter-spacing:.15px}
+.field .wrapi{position:relative}
+.field .wrapi svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
+.field input{width:100%;background:rgba(8,15,30,.75);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:16px 17px;color:#fff;font:400 16px Inter;outline:none}
+.field input.has-ic{padding-left:41px}
+.field input::placeholder{color:rgba(169,184,208,.6)}
+.field input:focus{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(40,123,255,.2)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.submit{width:100%;justify-content:center;padding:16px 28px;margin-top:4px}
+.submit:disabled{opacity:.6;cursor:wait}
+.status{font-size:14px;text-align:center;min-height:20px}
+.status.ok{color:var(--cyan)}.status.err{color:#ff8a8a}
+.form-note{text-align:center;color:var(--muted);font-size:14px;line-height:22px}
+
+/* testimonials */
+.reviews{background:var(--navy2);border-top:1px solid var(--line);padding:113px 0;position:relative;overflow:hidden}
+.rev-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:56px;flex-wrap:wrap}
+.rev-head p{font-size:18px;line-height:28px;color:var(--muted);margin-top:16px}
+.sliderctl{display:flex;gap:12px}
+.sliderctl button{width:44px;height:44px;border-radius:50%;background:rgba(8,15,30,.8);border:1px solid rgba(255,255,255,.15);color:#fff;display:grid;place-items:center;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tcard{background:rgba(8,15,30,.75);backdrop-filter:blur(12px);border:1px solid #e5e7eb;border-radius:24px;padding:29px;display:flex;flex-direction:column;gap:24px;transition:opacity .3s}
+.stars{display:flex;gap:4px;color:#ffb800}
+.stars svg{width:18px;height:18px;fill:currentColor;stroke:none}
+.tcard blockquote{font-size:16px;line-height:26px}
+.who{border-top:1px solid var(--line);padding-top:17px;display:flex;gap:14px;align-items:center;margin-top:auto}
+.avatar{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);flex-shrink:0}
+.who b{display:block;font:600 16px Inter}
+.who small{color:var(--muted);font-size:14px;line-height:22px}
+
+/* faq */
+.faq{background:var(--light);padding:96px 0}
+.faq-wrap{max-width:896px;margin:0 auto;padding:0 32px}
+.faq-head{text-align:center;margin-bottom:48px}
+.faq-head .eyebrow{color:var(--blue);margin-bottom:12px}
+.faq-head .h2{color:var(--navy)}
+.faq-head p{color:var(--ink);font-size:18px;line-height:28px;margin-top:16px;max-width:672px;margin-inline:auto}
+.acc{display:flex;flex-direction:column;gap:16px}
+.qa{background:#fff;border:1px solid #c0c6db;border-radius:20px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.qa.open{border-color:var(--blue);box-shadow:0 10px 14px rgba(23,107,206,.08)}
+.qa button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px;background:none;border:0;cursor:pointer;text-align:left;font:600 16px/24px Inter;color:var(--navy)}
+.qa.open button{color:var(--blue)}
+.qa .pm{width:32px;height:32px;border-radius:50%;background:#edf0ff;display:grid;place-items:center;flex-shrink:0;color:var(--blue);font-size:18px;line-height:1}
+.qa .ans{display:none;padding:0 24px 24px;color:var(--ink);font-size:16px;line-height:26px}
+.qa.open .ans{display:block}
+
+/* footer */
+footer{background:var(--navy);border-top:1px solid rgba(40,123,255,.3);padding:65px 0 40px;position:relative}
+footer::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,213,242,.7),transparent)}
+.fgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:40px;padding-bottom:49px;border-bottom:1px solid var(--line)}
+.fbrand{grid-column:1/span 4;display:flex;flex-direction:column;gap:16px}
+.fbrand .brand{align-self:flex-start}
+.fbrand .tag{font:600 20px 'Space Grotesk',sans-serif;color:var(--cyan);letter-spacing:-.15px}
+.fbrand p{color:var(--muted);font-size:14px;line-height:22px;max-width:384px}
+.social{display:flex;gap:12px;padding-top:8px}
+.social a{width:40px;height:40px;border-radius:50%;background:var(--navy2);border:1px solid #e5e7eb;display:grid;place-items:center;color:var(--muted)}
+.social a:hover{color:#fff}
+.social svg{width:16px;height:16px;fill:currentColor;stroke:none}
+.fcol{display:flex;flex-direction:column;gap:12px}
+.fcol h4{font:500 11px 'JetBrains Mono',monospace;letter-spacing:1.1px;color:var(--cyan);text-transform:uppercase;margin-bottom:4px}
+.fcol a,.fcol span{color:var(--muted);font-size:14px;line-height:22px}
+.fcol a:hover{color:#fff}
+.fq{grid-column:5/span 2}.fs{grid-column:7/span 3}.fc{grid-column:10/span 3}
+.bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;color:var(--muted);font-size:14px;flex-wrap:wrap;gap:12px}
+.bottom nav{display:flex;gap:24px;align-items:center}
+.bottom nav span{color:rgba(255,255,255,.2)}
+
+/* responsive */
+@media (max-width:1100px){
+  .menu{display:none}
+  .burger{display:block}
+  .menu.open{display:flex;position:absolute;top:96px;left:0;right:0;flex-direction:column;background:var(--navy);padding:24px 32px;border-bottom:1px solid var(--line)}
+  .hero h1{font-size:48px;line-height:56px}
+  .cards{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .hero-copy,.hero-visual,.lead-copy,.form-card,.fbrand,.fq,.fs,.fc{grid-column:1/-1}
+  .hero{padding:132px 0 80px}
+  .hero-visual{height:auto;min-height:420px}
+  .orbit{max-width:420px}
+  .counters{grid-template-columns:repeat(2,1fr)}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .fbrand{grid-column:1/-1}
+  .fq,.fs,.fc{grid-column:auto}
+  .form-card{padding:28px}
+  .h2{font-size:30px;line-height:38px}
+}
+@media (max-width:560px){
+  .wrap{padding:0 20px}
+  .hero h1{font-size:38px;line-height:46px;letter-spacing:-1px}
+  .lead{font-size:16px;line-height:26px}
+  .row2{grid-template-columns:1fr}
+  .counters{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  .f2,.f3,.code{display:none}
+  .float{padding:10px 12px}
+  .nav{height:80px}
+  .brand{height:56px;padding:6px 18px 6px 6px}
+  .emblem{width:40px;height:40px}
+  .cta-sm{display:none}
+  .menu.open{top:80px}
+  .bottom{justify-content:center;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Sticky header / navigation -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <div class="emblem" aria-hidden="true">A</div>
+      <div><b>ASPPAA</b><small>SOLUTION</small></div>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#top">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#freelance">Freelance Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:16px">
+      <a href="#contact" class="cta-sm">Let's Talk</a>
+      <button class="burger" id="burger" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="blob" style="background:rgba(23,107,206,.2);width:560px;height:560px;left:-128px;top:-128px"></div>
+  <div class="blob" style="background:rgba(0,213,242,.15);width:520px;height:520px;right:0;top:80px;filter:blur(130px)"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="badge"><div class="dot"></div><span class="mono">Your technology partner for what's next</span></div>
+      <h1 class="h1">Turning Digital<br>Ideas Into <span class="grad">Real-</span><br><span class="grad">World Solutions.</span></h1>
+      <p class="lead">From innovative IT solutions to meaningful freelance opportunities, we bring businesses, clients, and talented professionals together to make great things happen.</p>
+      <div class="ctas">
+        <a href="#services" class="btn btn-primary">Explore Our Services
+          <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#freelance" class="btn btn-ghost">I'm Looking for Projects</a>
+      </div>
+      <div class="trust">
+        <svg class="i" viewBox="0 0 24 24" style="color:var(--cyan)"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c2.5 0 5 1.8 5 4.5"/></svg>
+        Building connections. Creating opportunities. Delivering technology that matters.
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <svg class="orbit" viewBox="0 0 540 540" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#287bff"/><stop offset="1" stop-color="#00d5f2"/></linearGradient>
+        </defs>
+        <circle cx="270" cy="270" r="250" fill="none" stroke="url(#g1)" stroke-opacity=".35" stroke-width="1.5"/>
+        <ellipse cx="270" cy="270" rx="230" ry="110" fill="none" stroke="#287bff" stroke-opacity=".4" transform="rotate(-20 270 270)"/>
+        <ellipse cx="270" cy="270" rx="200" ry="80" fill="none" stroke="#00d5f2" stroke-opacity=".3" transform="rotate(25 270 270)"/>
+        <circle cx="270" cy="270" r="70" fill="rgba(23,107,206,.2)" stroke="#287bff" stroke-opacity=".6"/>
+        <text x="270" y="278" text-anchor="middle" fill="#fff" font-family="Space Grotesk" font-weight="700" font-size="30">A</text>
+        <g fill="#00d5f2"><circle cx="110" cy="200" r="5"/><circle cx="430" cy="160" r="5"/><circle cx="150" cy="400" r="5"/><circle cx="400" cy="420" r="5"/></g>
+        <g stroke="#287bff" stroke-opacity=".35"><line x1="270" y1="270" x2="110" y2="200"/><line x1="270" y1="270" x2="430" y2="160"/><line x1="270" y1="270" x2="150" y2="400"/><line x1="270" y1="270" x2="400" y2="420"/></g>
+      </svg>
+      <div class="float f1"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M6 18a4 4 0 010-8 6 6 0 0111.5-1.5A4.5 4.5 0 0118 18z"/></svg></div><div><b>IT Solutions</b><small>Cloud &amp; Custom Software</small></div></div>
+      <div class="float f2"><div class="ic" style="background:rgba(0,213,242,.15);border-color:rgba(0,213,242,.4);color:var(--cyan)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5h8v2"/></svg></div><div><b>Project Opportunities</b><small style="color:var(--cyan)">Active Client Briefs</small></div></div>
+      <div class="float f3"><div class="ic" style="background:rgba(40,123,255,.2)"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></div><div><b>Creative Professionals</b><small>Vetted Engineering &amp; Design</small></div></div>
+      <div class="code"><div style="color:var(--muted)">● ● &nbsp;asppaa.connect()</div><div>status: "ready"</div><div>mode: "IT + Freelance"</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. ACHIEVEMENT / IMPACT -->
+<section class="impact" id="about">
+  <div class="wrap">
+    <div class="impact-head">
+      <div class="eyebrow">Our impact in numbers</div>
+      <h2 class="h2" style="color:var(--navy)">Small Steps. Big Possibilities.<br>Meaningful Impact.</h2>
+      <p>Every successful project starts with an idea, a connection, and the right team. We're focused on creating opportunities, building strong partnerships, and delivering solutions that move businesses forward.</p>
+    </div>
+    <div class="counters">
+      <article class="counter"><div class="counter-top"><div class="counter-ic"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16v12H4zM9 7V4h6v3"/></svg></div><div class="counter-dot"></div></div><div><strong>XX+</strong><span>Projects Delivered</span></div></article>
+      <article class="counter"><div class="counter-top"><div class="counter-ic"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="counter-dot" style="background:var(--blue2)"></div></div><div><strong>XX+</strong><span>Happy Clients</span></div></article>
+      <article class="counter"><div class="counter-top"><div class="counter-ic"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></div><div class="counter-dot" style="background:var(--cyan)"></div></div><div><strong>XX+</strong><span>Freelancers Connected</span></div></article>
+      <article class="counter"><div class="counter-top"><div class="counter-ic"><svg class="i" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div><div class="counter-dot"></div></div><div><strong>XX+</strong><span>Solutions Created</span></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 3. LEAD GENERATION / CONTACT FORM -->
+<section class="lead-sec" id="contact">
+  <div class="blob" style="background:rgba(40,123,255,.15);width:600px;height:480px;left:25%;bottom:0;filter:blur(130px)"></div>
+  <div class="wrap lead-grid">
+    <div class="lead-copy">
+      <div class="eyebrow">Let's build something together</div>
+      <h2 class="h2">Have an Idea? Let's<br>Make It Happen.</h2>
+      <p class="lead" style="font-size:18px">Every great project starts with a conversation. Tell us what you're looking for, and let's explore how we can help you take the next step.</p>
+      <div class="points">
+        <div class="point"><i><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M5 12l5 5 9-10"/></svg></i>IT solutions for growing businesses.</div>
+        <div class="point"><i><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M5 12l5 5 9-10"/></svg></i>Opportunities for skilled freelancers.</div>
+        <div class="point"><i><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M5 12l5 5 9-10"/></svg></i>Reliable project collaboration.</div>
+      </div>
+      <div class="netcard">
+        <svg viewBox="0 0 400 138" aria-hidden="true">
+          <g stroke="#287bff" stroke-opacity=".5" stroke-width="1.2" fill="none">
+            <path d="M40 90 L140 40 L260 60 L360 30"/><path d="M140 40 L200 100 L260 60"/><path d="M40 90 L200 100 L360 30" stroke-opacity=".25"/>
+          </g>
+          <g fill="#00d5f2"><circle cx="40" cy="90" r="5"/><circle cx="140" cy="40" r="5"/><circle cx="260" cy="60" r="5"/><circle cx="360" cy="30" r="5"/></g>
+          <circle cx="200" cy="100" r="8" fill="#287bff"/>
+        </svg>
+        <div class="foot"><span>Businesses &amp; Startups</span><span>Direct matching</span><span>Freelancers</span></div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3 class="h3">Tell Us What You Need</h3>
+      <form id="leadForm" novalidate>
+        <div class="row2">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input id="name" name="name" type="text" placeholder="Enter your full name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <div class="wrapi">
+              <svg viewBox="0 0 24 24" class="i"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              <input class="has-ic" id="email" name="email" type="email" placeholder="you@company.com" required autocomplete="email">
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input id="phone" name="phone" type="tel" placeholder="+1 (555) 000-0000" required autocomplete="tel">
+        </div>
+        <button class="btn btn-primary submit" type="submit" id="submitBtn">Send Your Enquiry
+          <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <div class="status" id="status" role="status"></div>
+      </form>
+      <p class="form-note">Your information stays with us. No unnecessary calls, no spam — just a conversation about your goals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. TESTIMONIALS -->
+<section class="reviews" id="freelance">
+  <div class="blob" style="background:rgba(23,107,206,.15);width:700px;height:440px;left:40%;top:0;filter:blur(130px)"></div>
+  <div class="wrap" style="position:relative">
+    <div class="rev-head">
+      <div>
+        <div class="eyebrow">Trust built through experience</div>
+        <h2 class="h2">Don't Just Take Our Word for It.</h2>
+        <p>The best measure of our work is the people we work with. Every collaboration teaches us something new, and every successful project motivates us to aim higher.</p>
+      </div>
+      <div class="sliderctl">
+        <button id="prev" aria-label="Previous testimonial"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button id="next" aria-label="Next testimonial"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+    <div class="cards" id="cards">
+      <article class="tcard">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg>
+        </div>
+        <blockquote>"The team understood our requirements and made the entire process smooth. Their approach to communication and project delivery made a real difference."</blockquote>
+        <div class="who"><div class="avatar"></div><div><b>[Client Name]</b><small>[Business Owner / Startup Client]</small></div></div>
+      </article>
+      <article class="tcard">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg>
+        </div>
+        <blockquote>"Finding the right project opportunities can be challenging. Having a platform to connect with clients and work on meaningful projects is a great experience."</blockquote>
+        <div class="who"><div class="avatar"></div><div><b>[Freelancer Name]</b><small>[Full-Stack Software Specialist]</small></div></div>
+      </article>
+      <article class="tcard">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg>
+        </div>
+        <blockquote>"Professional communication, a collaborative approach, and a genuine focus on delivering quality. A great experience from beginning to end."</blockquote>
+        <div class="who"><div class="avatar"></div><div><b>[Partner Name]</b><small>[Technology Lead / Client Partner]</small></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5. FAQ -->
+<section class="faq" id="services">
+  <div class="faq-wrap">
+    <div class="faq-head">
+      <div class="eyebrow">Got questions? We have answers.</div>
+      <h2 class="h2">Everything You Need to Know.</h2>
+      <p>Choosing the right technology partner or finding the right project should feel simple. Here are some answers to help you get started.</p>
+    </div>
+    <div class="acc">
+      <div class="qa open"><button aria-expanded="true">Q1. What services does ASPPAA Solution provide? <span class="pm">−</span></button>
+        <div class="ans">We provide IT-related solutions and connect clients with professionals for freelance projects. Our focus is on helping businesses bring their digital ideas to life through the right technology and expertise.</div></div>
+      <div class="qa"><button aria-expanded="false">Q2. Can I hire ASPPAA Solution for my business project? <span class="pm">+</span></button>
+        <div class="ans">Yes. Share your goals and timeline through the enquiry form and our team will get back to you with next steps.</div></div>
+      <div class="qa"><button aria-expanded="false">Q3. How can freelancers get connected with projects? <span class="pm">+</span></button>
+        <div class="ans">Reach out through the form and tell us your skill set. We match vetted freelancers with client briefs that fit their expertise.</div></div>
+      <div class="qa"><button aria-expanded="false">Q4. What types of freelance projects are available? <span class="pm">+</span></button>
+        <div class="ans">Projects span software development, web development, design, and other technology work across businesses and startups.</div></div>
+      <div class="qa"><button aria-expanded="false">Q5. Do you work with startups and small businesses? <span class="pm">+</span></button>
+        <div class="ans">Yes, we work with startups, small businesses, and growing companies alike.</div></div>
+      <div class="qa"><button aria-expanded="false">Q6. How do I get started with ASPPAA Solution? <span class="pm">+</span></button>
+        <div class="ans">Fill in the "Tell Us What You Need" form above. We'll reply to start a conversation about your goals.</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- 6. FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <a href="#top" class="brand"><div class="emblem" aria-hidden="true">A</div><div><b>ASPPAA</b><small>SOLUTION</small></div></a>
+        <div class="tag">Empowering Ideas Through Technology.</div>
+        <p>We connect innovative ideas, reliable IT solutions, and talented professionals to create opportunities that matter.</p>
+        <div class="social">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4 9h4v12H4zM6 3a2 2 0 110 4 2 2 0 010-4zM10 9h4v2c.6-1 2-2.2 4-2.2 4 0 4.6 2.6 4.6 6V21h-4v-5.6c0-1.4 0-3.2-2-3.2s-2.3 1.5-2.3 3V21h-4z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8V6c0-1 .5-1.5 1.5-1.5H17V1h-2.5C11.7 1 11 3 11 5.5V8H8v3.5h3V23h3V11.5h2.7L17.5 8z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 2a8 8 0 11-4.1 14.9l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0112 4z"/></svg></a>
+        </div>
+      </div>
+      <div class="fcol fq"><h4>Quick Links</h4><a href="#top">Home</a><a href="#about">About Us</a><a href="#services">Services</a><a href="#freelance">Freelance Projects</a><a href="#contact">Contact Us</a></div>
+      <div class="fcol fs"><h4>Services</h4><a href="#services">IT Solutions</a><a href="#services">Web Development</a><a href="#services">Software Development</a><a href="#freelance">Freelance Opportunities</a><a href="#contact">Business Collaboration</a></div>
+      <div class="fcol fc"><h4>Contact Information</h4><span>Email: [Your Business Email]</span><span>Phone: [Your Contact Number]</span><span>Location: [Your Business Location]</span></div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 ASPPAA Solution. All Rights Reserved.</span>
+      <nav><a href="#">Privacy Policy</a><span>|</span><a href="#">Terms &amp; Conditions</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ---- Mobile menu ----
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  burger.addEventListener('click', () => menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+  // ---- Testimonial slider (one card at a time on small screens) ----
+  const cards = Array.from(document.querySelectorAll('#cards .tcard'));
+  let idx = 0;
+  function showCard(i) {
+    idx = (i + cards.length) % cards.length;
+    cards.forEach((c, n) => {
+      const active = n === idx;
+      c.style.opacity = (window.innerWidth <= 1100 && !active) ? '0.35' : '1';
+      c.style.outline = (window.innerWidth <= 1100 && active) ? '1px solid rgba(0,213,242,.5)' : '';
+    });
+  }
+  document.getElementById('prev').addEventListener('click', () => showCard(idx - 1));
+  document.getElementById('next').addEventListener('click', () => showCard(idx + 1));
+  window.addEventListener('resize', () => showCard(idx));
+  showCard(0);
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.qa button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const open = !item.classList.contains('open');
+      item.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.querySelector('.pm').textContent = open ? '−' : '+';
+    });
+  });
+
+  // ---- Lead form -> Google Apps Script (fire-and-forget GET; file:// safe) ----
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWFr87Z95i58t5MESLUXFC2hGTsU6pIoQ6khzC8fcBpECyRY3IKE_6C7oGNADEk4hSHw/exec";
+  const form = document.getElementById('leadForm');
+  const statusEl = document.getElementById('status');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function showSuccess() {
+    statusEl.className = 'status ok';
+    statusEl.textContent = 'Thank you! We\u2019ll be in touch soon.';
+    form.reset();
+    submitBtn.disabled = false;
+  }
+  function showError() {
+    statusEl.className = 'status err';
+    statusEl.textContent = 'Something went wrong. Please try again.';
+    submitBtn.disabled = false;
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    if (!name || !email || !phone) {
+      statusEl.className = 'status err';
+      statusEl.textContent = 'Please fill in all fields.';
+      return;
+    }
+
+    statusEl.className = 'status';
+    statusEl.textContent = 'Sending\u2026';
+    submitBtn.disabled = true;
+
+    const url = SCRIPT_URL + "?" + new URLSearchParams({name, email, phone});
+    fetch(url, { method: "GET", mode: "no-cors" })
+      .then(() => showSuccess())
+      .catch(() => showError());
+  });
+})();
+</script>
+</body>
+</html>
